@@ -143,10 +143,21 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="flex items-center gap-4">
+          {/* Desktop Admission Button - hidden on mobile */}
           <Link to="/admissions" className="hidden md:flex items-center gap-2 bg-linear-to-br from-royal-blue to-royal-blue-medium text-white px-6 py-2.5 rounded-md text-xs font-bold tracking-widest hover:-translate-y-0.5 hover:shadow-lg transition-all relative">
             ADMISSION 2027
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
+          </Link>
+
+          {/* Mobile Admission Button - visible only on mobile, hidden on tablet+ */}
+          <Link 
+            to="/admissions" 
+            className="md:hidden flex items-center bg-linear-to-br from-royal-blue to-royal-blue-medium text-white px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider hover:-translate-y-0.5 hover:shadow-lg transition-all relative whitespace-nowrap"
+          >
+            ADMISSION 2027
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full animate-ping" />
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full" />
           </Link>
 
           {/* Mobile Menu Toggle */}
