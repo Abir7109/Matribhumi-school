@@ -28,6 +28,18 @@ export default function Navbar() {
     }
   }, [location.pathname, location.hash]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -155,14 +167,14 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 z-50 bg-royal-blue/20 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[100] bg-royal-blue/30 backdrop-blur-sm lg:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[280px] z-50 bg-white shadow-2xl flex flex-col p-6 lg:hidden"
+              className="fixed top-0 right-0 h-screen w-[280px] z-[100] bg-white shadow-2xl flex flex-col p-6 lg:hidden overflow-hidden"
             >
               <div className="flex justify-between items-center mb-8">
                 <SchoolSeal size={40} />
