@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -158,25 +159,25 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
+      {/* Mobile Menu - Rendered via Portal to avoid parent positioning issues */}
+      {isMobileMenuOpen && createPortal(
+        <AnimatePresence>
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 z-[100] bg-royal-blue/30 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[9998] bg-royal-blue/30 backdrop-blur-sm lg:hidden"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-screen w-[280px] z-[100] bg-white shadow-2xl flex flex-col p-6 lg:hidden overflow-hidden"
+              className="fixed top-0 right-0 bottom-0 w-[280px] z-[9999] bg-white shadow-2xl flex flex-col p-6 lg:hidden"
             >
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-8 shrink-0">
                 <SchoolSeal size={40} />
                 <button 
                   className="text-royal-blue p-2 hover:bg-royal-blue/5 rounded-full transition-colors"
@@ -186,7 +187,7 @@ export default function Navbar() {
                 </button>
               </div>
 
-              <div className="flex flex-col gap-2 mb-8 overflow-y-auto flex-grow pr-2">
+              <div className="flex flex-col gap-2 mb-8 overflow-y-auto flex-1 pr-2 min-h-0">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
@@ -196,6 +197,7 @@ export default function Navbar() {
                   >
                     <Link
                       to={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
                         "block px-4 py-2.5 font-serif text-lg font-bold rounded-xl transition-all",
                         location.pathname === link.href 
@@ -213,6 +215,7 @@ export default function Navbar() {
                           <Link
                             key={`mobile-dropdown-${subItem.href}-${subIndex}`}
                             to={subItem.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
                             className="block py-2 text-sm text-zinc-500 hover:text-royal-blue font-medium"
                           >
                             {subItem.name}
@@ -224,13 +227,14 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="pt-6 border-t border-royal-blue/10 space-y-4">
+              <div className="pt-6 border-t border-royal-blue/10 space-y-4 shrink-0">
                 <div className="flex items-center gap-3 text-[#6B7280] px-4">
                   <Phone size={14} />
                   <span className="text-xs font-bold">01877-761105</span>
                 </div>
                 <Link 
                   to="/admissions" 
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="bg-royal-blue text-white py-3 rounded-xl font-bold text-sm text-center block shadow-lg shadow-royal-blue/10"
                 >
                   APPLY NOW
@@ -238,8 +242,9 @@ export default function Navbar() {
               </div>
             </motion.div>
           </>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </nav>
   );
 }
