@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-bengali: "Noto Sans Bengali", sans-serif;
+
+  --color-primary-navy: #0B1D4E;
+  --color-royal-blue: #1B3A7A;
+  --color-royal-blue-medium: #2952A3;
+  --color-sky-blue: #4A7FD4;
+  --color-academic-gold: #C9973A;
+  --color-warm-gold: #E8B84B;
+  --color-success-green: #059669;
+  --color-soft-white: #F8F9FF;
+  --color-ghost-white: #F2F4FF;
+
+  --shadow-blue: 0 8px 32px rgba(27, 58, 122, 0.12);
+  --shadow-gold: 0 8px 32px rgba(201, 151, 58, 0.15);
+}
+
+@layer base {
+  body {
+    @apply font-sans text-[#1A1A2E] bg-white scroll-smooth;
+  }
+}
+
+.glass-card {
+  @apply bg-white/72 backdrop-blur-[24px] border border-white/95 shadow-blue;
+}
+
+.glass-navy {
+  @apply bg-white/8 backdrop-blur-[12px] border border-white/14;
+}
+
+.text-gradient-gold {
+  @apply bg-linear-to-br from-[#E8B84B] to-[#C9973A] bg-clip-text text-transparent;
+}
+
+.word-wrapper {
+  @apply overflow-hidden inline-block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1B3A7A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2952A3;
+}
