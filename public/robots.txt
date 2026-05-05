@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR_VERCEL_DOMAIN/sitemap.xml
+Sitemap: https://matribhumi.vercel.app/sitemap.xml

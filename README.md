@@ -73,7 +73,7 @@ The built files will be in the `dist` directory.
 
 This site is deployed on **Vercel**. The deployment is automatically triggered on every push to the main branch.
 
-**Live Site:** [Your Vercel Domain Here]
+**Live Site:** https://matribhumi.vercel.app/
 
 ## SEO & Search Console
 
